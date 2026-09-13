@@ -9,6 +9,7 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState('');
+  const [smtp, setSmtp] = useState(null);
 
   useEffect(() => {
     api.settings
@@ -18,6 +19,7 @@ export default function AdminSettingsPage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
+    api.settings.smtp().then((res) => setSmtp(res?.data || null)).catch(() => {});
   }, []);
 
   async function save(e) {
@@ -122,6 +124,35 @@ export default function AdminSettingsPage() {
               <div><label className={label}>WhatsApp default message</label><input value={form.whatsappDefaultMessage} onChange={(e) => set('whatsappDefaultMessage', e.target.value)} className={input} /></div>
             </div>
           </div>
+        </section>
+
+        <section className="rounded-2xl bg-white p-6">
+          <h2 className="font-display text-xl text-espresso">Email (SMTP) notifications</h2>
+          <p className="mt-1 text-sm text-espresso-soft">
+            Booking requests and enquiries trigger emails. Configure SMTP on the server (the <code className="text-xs">backend/.env</code> file) — this panel only shows the current status; secrets are never exposed.
+          </p>
+          {smtp ? (
+            <div className="mt-4 space-y-2 text-sm">
+              <div className="flex items-center gap-2">
+                {smtp.configured ? (
+                  <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">Configured</span>
+                ) : (
+                  <span className="inline-flex items-center rounded-full bg-rose-50 px-2.5 py-1 text-xs font-medium text-rose-700 ring-1 ring-rose-200">Not configured</span>
+                )}
+                <span className="text-espresso-soft">
+                  {smtp.host || '(no host)'}:{smtp.port} {smtp.secure ? '(TLS)' : ''}
+                </span>
+              </div>
+              <p className="text-espresso-soft">
+                Sender: <span className="text-espresso">{smtp.from || '—'}</span> · Owner inbox: <span className="text-espresso">{smtp.ownerEmail || '—'}</span>
+              </p>
+              <p className="text-xs text-espresso-soft">
+                Set <code>SMTP_HOST</code>, <code>SMTP_USER</code>, <code>SMTP_PASS</code> (and optionally <code>SMTP_SECURE=true</code> for port 465) in <code>backend/.env</code>, then restart the backend. Leave <code>SMTP_HOST</code> blank to disable email sending — submissions are still stored.
+              </p>
+            </div>
+          ) : (
+            <p className="mt-4 text-sm text-espresso-soft">Loading SMTP status…</p>
+          )}
         </section>
 
         {notice && (
