@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #fbf7f1;
+  --espresso: #241b16;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-espresso font-body antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #b76e79;
+  color: #fff;
+}
+
+/* Elegant scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f3e9dd;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c6a15b, #b76e79);
+  border-radius: 8px;
+}
+
+/* Accessible focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #c6a15b;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Film grain overlay for luxury texture */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Gold hairline */
+.gold-rule {
+  background: linear-gradient(90deg, transparent, #c6a15b 20%, #c6a15b 80%, transparent);
+  height: 1px;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Slow float for decorative orbs */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-18px) scale(1.04);
+  }
+}
+.animate-floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+/* Shimmer on CTA */
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.btn-shimmer {
+  background-size: 200% auto;
+}
+.btn-shimmer:hover {
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* Hide scrollbars for carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
