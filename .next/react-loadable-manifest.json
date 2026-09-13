@@ -1,18 +1,16 @@
 {
   "components\\Hero.jsx -> ./Hero3D": {
-    "id": 5732,
+    "id": "components\\Hero.jsx -> ./Hero3D",
     "files": [
-      "static/chunks/b536a0f1.b03d42b9fdc41e09.js",
-      "static/chunks/808.f39f23055dc09c8c.js",
-      "static/chunks/732.3db26a0f3f9a5aa4.js"
+      "static/chunks/_app-pages-browser_components_Hero3D_jsx.js"
     ]
   },
   "node_modules\\@react-three\\drei\\core\\VideoTexture.js -> hls.js": {
-    "id": null,
+    "id": "node_modules\\@react-three\\drei\\core\\VideoTexture.js -> hls.js",
     "files": []
   },
   "node_modules\\@react-three\\drei\\web\\FaceLandmarker.js -> @mediapipe/tasks-vision": {
-    "id": null,
+    "id": "node_modules\\@react-three\\drei\\web\\FaceLandmarker.js -> @mediapipe/tasks-vision",
     "files": []
   }
 }

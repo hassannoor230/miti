@@ -67,6 +67,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en-GB" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
+      </head>
       <body suppressHydrationWarning className="grain">
         <JsonLd />
         <SettingsProvider>
