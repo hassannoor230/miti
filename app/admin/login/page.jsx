@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, Mail, KeyRound } from 'lucide-react';
 import { api } from '@/lib/api';
+import { setCookie } from '@/lib/cookies';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -17,7 +18,8 @@ export default function AdminLoginPage() {
     setState('sending');
     setError('');
     try {
-      await api.auth.login(email, password);
+      const res = await api.admin.login(email, password);
+      if (res.token) setCookie('miti_admin_token', res.token, 1);
       router.push('/admin');
       router.refresh();
     } catch (err) {

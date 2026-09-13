@@ -15,11 +15,15 @@ import {
   LogOut,
   Menu,
   X,
+  Users,
 } from 'lucide-react';
 import { api } from '@/lib/api';
 
 const NAV = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+  { href: '/admin/customers', label: 'Customers', icon: Users },
+  { href: '/admin/appointments', label: 'Appointments', icon: CalendarCheck },
+  { href: '/admin/enquiries', label: 'Enquiries', icon: Mail },
   { href: '/admin/bookings', label: 'Bookings', icon: CalendarCheck },
   { href: '/admin/services', label: 'Services', icon: Sparkles },
   { href: '/admin/reviews', label: 'Reviews', icon: Star },
